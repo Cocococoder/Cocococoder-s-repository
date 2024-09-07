@@ -130,18 +130,18 @@ for i in band:
 
 #这是训练集
 #'''
-t = 'train_disk_noCr_yesNoise_noPsf'
+t = 'train_disk_noCr_yesNoise_yesPsf'
 #t = 'validation_augment_test'
 
 for i in range(0, 3):
     for j in range(0, 3):
-        file_path = f"/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{j}/{band[i]}/"
-        #file_path = f"/mnt/share/CRCNN_and_CRNN/NN_color_disk_psf_noise/{t}/specimen/{band[i]}/"
+        #file_path = f"/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{j}/{band[i]}/"
+        file_path = f"/home/lqy/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{j}/{band[i]}/"
         # 检查上级目录是否存在，如果不存在则创建
         os.makedirs(file_path, exist_ok=True)
 
-file_path = f"/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/label/"
-#file_path = f"/mnt/share/CRCNN_and_CRNN/NN_color_disk_psfv_noise/{t}/label/"
+#file_path = f"/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/label/"
+file_path = f"/home/lqy/CRCNN_and_CRNN/NN_color_disk_cr/{t}/label/"
 # 检查上级目录是否存在，如果不存在则创建
 os.makedirs(file_path, exist_ok=True)
 
@@ -154,8 +154,8 @@ os.makedirs(file_path, exist_ok=True)
 #def process_first_galaxy(e, phi, b, sed, disk, psf, shear, case, output_queue):
 #def process_first_galaxy(e, phi, b, sed, disk, psf, shear, case, shared_data):
 #def process_first_galaxy(e, phi, b, sed, disk, shear, case, shared_data):
-def process_first_galaxy(e_modulus, phi, b, sed, disk, snr, shear, case):
-#def process_first_galaxy(e_modulus, phi, b, sed, disk, shear, psf, case):
+#def process_first_galaxy(e_modulus, phi, b, sed, disk, snr, shear, case):
+def process_first_galaxy(e_modulus, phi, b, sed, disk, snr, shear, psf, case):
     ##########################################
     # 设置固有椭率
     ellipticity_plus = galsim.Shear(e=e_modulus, beta=phi*galsim.degrees)
