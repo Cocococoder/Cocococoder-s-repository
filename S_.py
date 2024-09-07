@@ -164,7 +164,7 @@ def process_first_galaxy(e_modulus, phi, b, sed, disk, snr, shear, psf, case):
     galaxy = sed * disk
     galaxy_plus = galaxy.shear(ellipticity_plus) # 添加固有椭率                                    
     galaxy_plus = galaxy_plus.shear(shear)
-    #galaxy_plus = galsim.Convolve([galaxy_plus, psf])
+    galaxy_plus = galsim.Convolve([galaxy_plus, psf])
 
     '''
     psf = galsim.Airy(flux=1., lam=np.random.randint(band_limit[b][0], band_limit[b][1]), diam=2., obscuration=0.1)
