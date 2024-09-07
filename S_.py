@@ -73,7 +73,7 @@ def random_number():
 
 def generate_random_output():
     # 生成包含1到100的整数的列表
-    num_list = list(range(1, 101))
+    #num_list = list(range(1, 101))
     
     # 从列表中随机选择一个数
     rand_num = random.choice(num_list)
@@ -96,6 +96,8 @@ band = np.array(['g','r','i'])
 #my_params = galsim.hsm.HSMParams(max_mom2_iter=8000)
 redshift = np.arange(0.0, 2.1, 0.1)
 band_limit = np.array([[380, 580],[510, 720],[660, 900]])
+# 生成包含1到100的整数的列表
+num_list = list(range(1, 101))
 
 #'''
 # 把sed预先装进内存里
@@ -272,8 +274,8 @@ def process_first_galaxy(e_modulus, phi, b, sed, disk, snr, shear, psf, case):
             arr = np.array([e1, e2, size, Q0, kurtosis])
 
             # 存specimen
-            #with open(f'/mnt/share/CRCNN_and_CRNN/NN_color_disk_psf_noise/{t}/specimen/{band[b]}/case_{case}.txt', 'a') as file:
-            with open(f'/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{q}/{band[b]}/case_{case}.txt', 'a') as file:        
+            with open(f'/home/lqy/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{q}/{band[b]}/case_{case}.txt', 'a') as file:
+            #with open(f'/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{q}/{band[b]}/case_{case}.txt', 'a') as file:        
                 np.savetxt(file, [arr])
         
             return True
@@ -308,7 +310,7 @@ def process_first_galaxy(e_modulus, phi, b, sed, disk, snr, shear, psf, case):
     galaxy = sed * disk
     galaxy_minus = galaxy.shear(ellipticity_minus) # 添加固有椭率                                    
     galaxy_minus = galaxy_minus.shear(shear)
-    #galaxy_minus = galsim.Convolve([galaxy_minus, psf])
+    galaxy_minus = galsim.Convolve([galaxy_minus, psf])
 
     '''
     psf = galsim.Airy(flux=1., lam=np.random.randint(band_limit[b][0], band_limit[b][1]), diam=2., obscuration=0.1)
@@ -408,8 +410,8 @@ def process_first_galaxy(e_modulus, phi, b, sed, disk, snr, shear, psf, case):
             arr = np.array([e1, e2, size, Q0, kurtosis])                            
 
             # 存specimen
-            #with open(f'/mnt/share/CRCNN_and_CRNN/NN_color_disk_psf_noise/{t}/specimen/{band[b]}/case_{case}.txt', 'a') as file:
-            with open(f'/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{q}/{band[b]}/case_{case}.txt', 'a') as file:        
+            with open(f'/home/lqy/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{q}/{band[b]}/case_{case}.txt', 'a') as file:
+            #with open(f'/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{q}/{band[b]}/case_{case}.txt', 'a') as file:        
                 np.savetxt(file, [arr])
             
             return True
@@ -442,8 +444,8 @@ def process_first_galaxy(e_modulus, phi, b, sed, disk, snr, shear, psf, case):
 #def process_remaining_galaxy(e, phi, b, z, average_intensity, bulge, disk, shear, case, psf):
 #def process_remaining_galaxy(e, phi, b, sed, disk, psf, shear, case, shared_data):
 #def process_remaining_galaxy(e, phi, b, sed, disk, shear, case, shared_data):
-def process_remaining_galaxy(e_modulus, phi, b, sed, disk, snr, shear, case):
-#def process_remaining_galaxy(e_modulus, phi, b, sed, disk, shear, psf, case):
+#def process_remaining_galaxy(e_modulus, phi, b, sed, disk, snr, shear, case):
+def process_remaining_galaxy(e_modulus, phi, b, sed, disk, snr, shear, psf, case):
     ##########################################
     # 设置固有椭率
     ellipticity_plus = galsim.Shear(e=e_modulus, beta=phi*galsim.degrees)
@@ -452,7 +454,7 @@ def process_remaining_galaxy(e_modulus, phi, b, sed, disk, snr, shear, case):
     galaxy = sed * disk
     galaxy_plus = galaxy.shear(ellipticity_plus) # 添加固有椭率                                    
     galaxy_plus = galaxy_plus.shear(shear)
-    #galaxy_plus = galsim.Convolve([galaxy_plus, psf])
+    galaxy_plus = galsim.Convolve([galaxy_plus, psf])
     '''
     psf = galsim.Airy(flux=1., lam=np.random.randint(band_limit[b][0], band_limit[b][1]), diam=2., obscuration=0.1)
 
@@ -557,8 +559,8 @@ def process_remaining_galaxy(e_modulus, phi, b, sed, disk, snr, shear, case):
             arr = np.array([e1, e2, size, Q0, kurtosis])                            
 
             # 存specimen
-            #with open(f'/mnt/share/CRCNN_and_CRNN/NN_color_disk_psf_noise/{t}/specimen/{band[b]}/case_{case}.txt', 'a') as file:
-            with open(f'/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{q}/{band[b]}/case_{case}.txt', 'a') as file:        
+            with open(f'/home/lqy/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{q}/{band[b]}/case_{case}.txt', 'a') as file:
+            #with open(f'/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{q}/{band[b]}/case_{case}.txt', 'a') as file:        
                 np.savetxt(file, [arr])
         
             return True
@@ -593,7 +595,7 @@ def process_remaining_galaxy(e_modulus, phi, b, sed, disk, snr, shear, case):
     galaxy = sed * disk
     galaxy_minus = galaxy.shear(ellipticity_minus) # 添加固有椭率                                    
     galaxy_minus = galaxy_minus.shear(shear)
-    #galaxy_minus = galsim.Convolve([galaxy_minus, psf])
+    galaxy_minus = galsim.Convolve([galaxy_minus, psf])
     '''
     psf = galsim.Airy(flux=1., lam=np.random.randint(band_limit[b][0], band_limit[b][1]), diam=2., obscuration=0.1)
 
@@ -693,8 +695,8 @@ def process_remaining_galaxy(e_modulus, phi, b, sed, disk, snr, shear, case):
             arr = np.array([e1, e2, size, Q0, kurtosis])                                        
 
             # 存specimen
-            #with open(f'/mnt/share/CRCNN_and_CRNN/NN_color_disk_psf_noise/{t}/specimen/{band[b]}/case_{case}.txt', 'a') as file:
-            with open(f'/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{q}/{band[b]}/case_{case}.txt', 'a') as file:        
+            with open(f'/home/lqy/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{q}/{band[b]}/case_{case}.txt', 'a') as file:
+            #with open(f'/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/specimen/{q}/{band[b]}/case_{case}.txt', 'a') as file:        
                 np.savetxt(file, [arr])
             
             return True
@@ -746,10 +748,12 @@ def gen(case):
     # 将数组保存到文件
     arr = np.array([g1, g2, case])
     
-    with open(f'/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/label/shear.txt', 'a') as file:
+    #with open(f'/Users/user/CRCNN_and_CRNN/NN_color_disk_cr/{t}/label/shear.txt', 'a') as file:
+    with open(f'/home/lqy/CRCNN_and_CRNN/NN_color_disk_cr/{t}/label/shear.txt', 'a') as file:
     
         np.savetxt(file, [arr])
 
+    # 如果能让label对星系的限制的简并变的越少越好，但这也会导致输入特征的增加 
     # 随机生成星系的尺寸
     disk_hlr = np.random.uniform(low=0.1, high=1.2)
     #bulge_hlr = np.random.uniform(low=0.09, high=0.2)
@@ -769,19 +773,19 @@ def gen(case):
     #with multiprocessing.Pool() as pool:      
 
     # 现在把每个realization的psf都变得不一样
-
+    # 为了使问题简化，在不给模型输入psf信息的情况下，每个case中每个realization的psf使用一样的 
     counts = 0 # 注意这里！
-    '''
+    #'''
     wavelength_g = np.random.randint(380, 580)
     wavelength_r = np.random.randint(510, 720)
     wavelength_i = np.random.randint(660, 900)
-    print(f'g波段psf所处的波长: {wavelength_g}, r波段psf所处的波长: {wavelength_r}, i波段psf所处的波长: {wavelength_i}')
+    #print(f'g波段psf所处的波长: {wavelength_g}, r波段psf所处的波长: {wavelength_r}, i波段psf所处的波长: {wavelength_i}')
     psf_g = galsim.Airy(flux=1., lam=wavelength_g, diam=2., obscuration=0.1)
     psf_r = galsim.Airy(flux=1., lam=wavelength_r, diam=2., obscuration=0.1)
     psf_i = galsim.Airy(flux=1., lam=wavelength_i, diam=2., obscuration=0.1)
     
     psf_list = np.array([psf_g, psf_r, psf_i])
-    '''
+    #'''
     # 选择星系SED的红移
     z = np.random.choice(redshift)
     z = np.round(z, 1)
@@ -832,7 +836,7 @@ def gen(case):
         #input_data_list = [(e, phi, j, sed[j], disk_list[j], psf_list[j], shear, case, [output_queue1, output_queue2, output_queue3][j]) for j in range(3)]
         #input_data_list = [(e, phi, j, sed[j], disk_list[j], psf_list[j], shear, case, shared_data) for j in range(3)]
         #input_data_list = [(e, phi, j, sed[j], disk_list[j], shear, case, shared_data) for j in range(3)]
-        input_data_list = [(e_modulus, phi, j, sed[j], disk_list[j], snr_list[j], shear, case) for j in range(3)]
+        input_data_list = [(e_modulus, phi, j, sed[j], disk_list[j], snr_list[j], shear, psf_list[j], case) for j in range(3)]
         #input_data_list = [(e_modulus, phi, j, sed[j], disk_list[j], shear, psf_list[j], case) for j in range(3)]
         pool.starmap(process_first_galaxy, input_data_list)
 
@@ -877,7 +881,7 @@ def gen(case):
 
         #input_data_list = [(e, phi, j, sed[j], disk_list[j], psf_list[j], shear, case, shared_data) for j in range(3)]
         #input_data_list = [(e, phi, j, sed[j], disk_list[j], shear, case, shared_data) for j in range(3)]
-        input_data_list = [(e_modulus, phi, j, sed[j], disk_list[j], snr_list[j], shear, case) for j in range(3)]
+        input_data_list = [(e_modulus, phi, j, sed[j], disk_list[j], snr_list[j], shear, psf_list[j], case) for j in range(3)]
         #input_data_list = [(e_modulus, phi, j, sed[j], disk_list[j], shear, psf_list[j], case) for j in range(3)]
         pool.starmap(process_remaining_galaxy, input_data_list)
 
@@ -890,21 +894,7 @@ def gen(case):
     #pool.close()
     #pool.join()  
 
-'''
-with multiprocessing.Pool() as pool:
 
-    for i in range(0, 5000):
-
-        gen(i)  
-
-'''
-'''
-def worker_function():
-    # 工作函数的代码
-    for i in range(0, 5000):
-
-        gen(i)  
-'''
 if __name__ == '__main__':
     with multiprocessing.Pool() as pool:
         # 任务分配的代码
